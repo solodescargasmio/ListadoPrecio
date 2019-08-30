@@ -2,6 +2,7 @@ package com.produccion.stockmeuresis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -42,6 +43,7 @@ public class ListaProductos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_productos);
         setActionBar();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         listaProd=(ListView) findViewById(R.id.listaProd);
         cnn=new ConexionSQLiteHelper(getApplicationContext());
         consultarProductos();
@@ -96,10 +98,12 @@ public class ListaProductos extends AppCompatActivity {
         MenuItem item1= menu.findItem(R.id.navigation_home);
         MenuItem item2= menu.findItem(R.id.navigation_notifications);
         MenuItem item3= menu.findItem(R.id.editar_prod);
+        MenuItem item4= menu.findItem(R.id.eliminar_prod);
         item.setVisible(false);
         item1.setVisible(false);
         item2.setVisible(false);
         item3.setVisible(false);
+        item4.setVisible(false);
         super.onPrepareOptionsMenu(menu);
         return true; }
 

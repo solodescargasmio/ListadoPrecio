@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StockmEuresis</string>
+    <string name="app_name">EuresismListadoPrecios</string>
     <string name="Explicacion">EL BOTON "SALIR" CIERRA LA APLICACION.  EL BOTON "CARGAR LISTADO", PERMITE CARGAR  EL LISTADO DE PRODUCTOS CON SUS PRESIOS PARA VISUALIZARLOS DESDE LA APLICACION</string>
     <string name="title_activity_carga_archivo">ActivityCargaArchivo</string>
     <string name="title_home">SELECCIONE UN ARCHIVO CON EXTENCION .CVR</string>

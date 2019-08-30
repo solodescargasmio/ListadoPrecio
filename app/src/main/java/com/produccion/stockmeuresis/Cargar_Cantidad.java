@@ -1,8 +1,11 @@
 package com.produccion.stockmeuresis;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,7 +29,7 @@ public class Cargar_Cantidad extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cargar__cantidad);
         setActionBar();
-        txCantidad=(EditText)findViewById(R.id.txAgCantidad);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         txCodB=(TextView)findViewById(R.id.txCod_B);
         txD=(TextView)findViewById(R.id.txD);
         txActual=(TextView)findViewById(R.id.txActual);
@@ -38,8 +41,8 @@ public class Cargar_Cantidad extends AppCompatActivity {
         cnn=new ConexionSQLiteHelper(getApplicationContext());
       Integer productoID=getIntent().getExtras().getInt("productoID");
           producto=cnn.traerProducto(productoID);
-      txActual.setText("CANTIDAD ACTUAL : "+producto.getCantidad());
-       txCodB.setText(producto.getCodigo()+"/"+producto.getCodigoBarra());
+      txActual.setText("PRECIO : "+producto.getPrecio());
+       txCodB.setText(producto.getCodigo()+" / "+producto.getCodigoBarra());
        txD.setText(producto.getDescripcion());
     }
 
@@ -55,6 +58,7 @@ public class Cargar_Cantidad extends AppCompatActivity {
         MenuItem item2= menu.findItem(R.id.navigation_notifications);
         MenuItem item3= menu.findItem(R.id.agregar_prod);
         MenuItem item4=menu.findItem(R.id.exportar_prod);
+        MenuItem item5=menu.findItem(R.id.eliminar_prod);
         item.setVisible(false);
         item1.setVisible(false);
         item2.setVisible(false);
@@ -72,9 +76,42 @@ public class Cargar_Cantidad extends AppCompatActivity {
                 startActivity(ir);
 
                 return true;
+            case R.id.eliminar_prod:
+                 ////////////////////////////////////////////////////////////////////////////
+                AlertDialog.Builder alerta=new AlertDialog.Builder(this);
+                alerta.setMessage("DESEA ELIMINAR DE FORMA DEFINITIVA ESTE PRODUCTO ?");
+                alerta.setTitle("ELIMINAR PRODUCTO");
+                alerta.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        eliminarProducto();
+                    }
+                });
+                alerta.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog dialog=alerta.create();
+                dialog.show();
+                /////////////////////////////////////////////////////////////////////////////
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void eliminarProducto(){
+       if(cnn.eliminarProducto(producto.getId())){
+           Toast.makeText(this,"PRODUCTO SE ELIMINO CON EXITO ",Toast.LENGTH_SHORT).show();
+           Intent ir=new Intent(Cargar_Cantidad.this,ListaProductos.class);
+           ir.putExtra("productoID",producto.getId());
+           startActivity(ir);
+           finish();
+       }else{
+           Toast.makeText(this,"ERROR AL ELIMINAR PRODUCTO. VERIFIQUE ",Toast.LENGTH_SHORT).show();
+       }
+
     }
     public void cargarCantidad(View view){
        if(txCantidad.getText().toString()!=""){

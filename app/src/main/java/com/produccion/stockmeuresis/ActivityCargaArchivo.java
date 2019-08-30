@@ -1,6 +1,7 @@
 package com.produccion.stockmeuresis;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
@@ -58,6 +59,7 @@ public class ActivityCargaArchivo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carga_archivo);
         setActionBar();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
     protected void setActionBar(){
         ActionBar actBar=getSupportActionBar();

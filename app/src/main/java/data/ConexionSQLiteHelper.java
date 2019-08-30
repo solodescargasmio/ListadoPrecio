@@ -119,23 +119,37 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
         CerrarConexion(db);
         return lOk;
     }
+
     public boolean actualizarProducto(Producto producto){
         boolean lOk=false;
         String strFilter = "id=" + producto.getId();
         ContentValues cv=new ContentValues();
-        cv.put("Codigo",producto.getCodigo());
-        cv.put("Descripcion",producto.getDescripcion());
-        cv.put("CodigoBarra",producto.getCodigoBarra());
+        cv.put(Utilidades.C_CODIGO,producto.getCodigo());
+        cv.put(Utilidades.C_DESCRIPCION,producto.getDescripcion());
+        cv.put(Utilidades.C_CODBARRA,producto.getCodigoBarra());
+        cv.put(Utilidades.C_PRECIO,producto.getPrecio());
         SQLiteDatabase db=getReadableDatabase();
         long id= (long) db.update(Utilidades.C_TABLA,cv,"id=" + producto.getId() ,null);
         CerrarConexion(db);
+        return lOk;
+    }
+    public boolean eliminarProducto(Integer nProd){
+        boolean lOk=false;
+        String strFilter = "id=" + nProd;
+        SQLiteDatabase db=getReadableDatabase();
+        String[] args = new String[]{strFilter};
+        long id= (long) db.delete(Utilidades.C_TABLA,strFilter,null);
+        CerrarConexion(db);
+        if(id>0){
+            lOk=true;
+        }
         return lOk;
     }
     public boolean existeCodigo(String codigo, Integer id){
         Producto producto=new Producto();
         boolean lOk=false;
         SQLiteDatabase db=getReadableDatabase();
-        Cursor cursor= db.rawQuery("Select * from producto where id!="+id+" and Codigo="+codigo,null);
+        Cursor cursor= db.rawQuery("Select * from producto where id!="+id+" and Codigo='"+codigo+"'",null);
         while(cursor.moveToNext()) {
             producto.setId(cursor.getInt(0));
             producto.setCodigo(cursor.getString(1));
@@ -170,7 +184,7 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
         boolean lOk=false;
         producto.setId(0);
         SQLiteDatabase db=getReadableDatabase();
-        Cursor cursor= db.rawQuery("Select * from producto where id!="+id+" and CodigoBarra="+codigo,null);
+        Cursor cursor= db.rawQuery("Select * from producto where id!="+id+" and CodigoBarra='"+codigo+"'",null);
         while(cursor.moveToNext()) {
             producto.setId(cursor.getInt(0));
             producto.setCodigo(cursor.getString(1));

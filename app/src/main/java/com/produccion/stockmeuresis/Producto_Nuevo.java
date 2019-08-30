@@ -2,6 +2,7 @@ package com.produccion.stockmeuresis;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -34,6 +35,7 @@ public class Producto_Nuevo extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         setActionBar();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setVisibility(INVISIBLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -42,25 +44,22 @@ public class Producto_Nuevo extends AppCompatActivity {
         CodBarra=(EditText)findViewById(R.id.edCodBaN);
         Desc=(EditText)findViewById(R.id.edDescN);
         Prec=(EditText)findViewById(R.id.edPreN);
-        Cant=(EditText)findViewById(R.id.edCantN);
         btnGuardar=(Button)findViewById(R.id.btnGuardar);
         cnn=new ConexionSQLiteHelper(getApplicationContext());
 
         if(getIntent().getStringExtra("productoID")!=null){
             nId= Integer.parseInt(getIntent().getExtras().getString("productoID"));
             if(nId!=0){
-                Prec.setVisibility(INVISIBLE);
-                Cant.setVisibility(INVISIBLE);
                 producto=new Producto();
                 producto=cnn.traerProducto(nId);
                 Codigo.setText(producto.getCodigo());
                 CodBarra.setText(producto.getCodigoBarra());
+                Prec.setText(String.valueOf(producto.getPrecio()));
                 Desc.setText(producto.getDescripcion());
             }
         }else
         { nId=cnn.obtenerProxID();
             Prec.setVisibility(View.VISIBLE);
-            Cant.setVisibility(View.VISIBLE);
         }
         Codigo.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,6 +84,7 @@ public class Producto_Nuevo extends AppCompatActivity {
 
             }
         });
+
         CodBarra.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,28 +136,24 @@ public class Producto_Nuevo extends AppCompatActivity {
         float precio=(float)0.0,cantidad= (float) 0.0;
         String cPrec="",cCant="";
         cPrec=Prec.getText().toString();
-        cCant=Cant.getText().toString();
         if(!cPrec.equals("")){
             precio=Float.valueOf(cPrec);}
-
-        if(!cCant.equals("")){
-            cantidad=Float.valueOf(cCant);
-        }
         if(Codigo.getText().toString().equals("")){
             lOk=false;
             Toast.makeText(this,"INGRESE UN CODIGO PARA EL PRODUCTO",Toast.LENGTH_SHORT).show();
             Codigo.requestFocus();
         }
-        if(Desc.getText().toString().equals("")){
-            lOk=false;
-            Toast.makeText(this,"INGRESE UNA DESCRIPCION PARA EL PRODUCTO",Toast.LENGTH_SHORT).show();
-            Desc.requestFocus();
-        }
-        if(CodBarra.getText().toString().equals("")){
+        if((lOk) && (CodBarra.getText().toString().equals(""))){
             lOk=false;
             Toast.makeText(this,"INGRESE UN CODIGO DE BARRA PARA EL PRODUCTO",Toast.LENGTH_SHORT).show();
             CodBarra.requestFocus();
         }
+        if((lOk) && (Desc.getText().toString().equals(""))){
+            lOk=false;
+            Toast.makeText(this,"INGRESE UNA DESCRIPCION PARA EL PRODUCTO",Toast.LENGTH_SHORT).show();
+            Desc.requestFocus();
+        }
+
         if(lOk){
             if(producto==null){
                 producto=new Producto();
@@ -174,12 +170,13 @@ public class Producto_Nuevo extends AppCompatActivity {
                 producto.setCodigo(Codigo.getText().toString());
                 producto.setCodigoBarra(CodBarra.getText().toString());
                 producto.setDescripcion(Desc.getText().toString());
+                producto.setPrecio(precio);
                 if(cnn.actualizarProducto(producto)){
                 lOk=true;
               }
             }
             if(lOk){
-                Toast.makeText(this,"PRODUCTO GUARDADO CON EXITO",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"PRODUCTO SE GUARDO CON EXITO",Toast.LENGTH_SHORT).show();
                 Intent ir=new Intent(Producto_Nuevo.this,ListaProductos.class);
                 startActivity(ir);
             }else{
@@ -222,6 +219,26 @@ public class Producto_Nuevo extends AppCompatActivity {
         }else {
             lOk=cnn.existeCodigo(valor,id);
         }
+        return lOk;
+    }
+    public boolean caracterCorrecto(String valor){
+        boolean lOk=false;
+        Integer siz=valor.length();
+        valor=valor.substring(siz-1,siz);
+        switch (valor){
+            case "0": lOk=true; break;
+            case "1": lOk=true; break;
+            case "2": lOk=true; break;
+            case "3": lOk=true; break;
+            case "4": lOk=true; break;
+            case "5": lOk=true; break;
+            case "6": lOk=true; break;
+            case "7": lOk=true; break;
+            case "8": lOk=true; break;
+            case "9": lOk=true; break;
+            case ".": lOk=true; break;
+        }
+
         return lOk;
     }
 

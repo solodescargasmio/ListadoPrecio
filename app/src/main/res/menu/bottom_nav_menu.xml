@@ -30,7 +30,12 @@
     <item
         android:id="@+id/exportar_prod"
         android:icon="@drawable/ic_export"
-        android:title="Exportar Stock"
+        android:title="Exportar Listado"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/eliminar_prod"
+        android:icon="@drawable/ic_eliminar"
+        android:title="Exportar Producto"
         app:showAsAction="ifRoom" />
 
 </menu>

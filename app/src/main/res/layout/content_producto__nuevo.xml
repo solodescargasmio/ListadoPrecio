@@ -8,6 +8,23 @@
     tools:context=".Producto_Nuevo"
     tools:showIn="@layout/activity_producto__nuevo">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="403dp"
+        android:layout_height="203dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnConsultaLista"
+        app:srcCompat="@drawable/fondo" />
+
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="220dp"
@@ -17,14 +34,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:onClick="guardarProdNuevo"
         android:text="@string/btnGuardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816" />
+        app:layout_constraintVertical_bias="0.609" />
 
     <EditText
         android:id="@+id/edCodN"
@@ -32,14 +48,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Codigo"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,14 +87,14 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
         android:hint="Descripcion"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.663"
+        app:layout_constraintHorizontal_bias="0.614"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edCodBaN"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.176" />
 
     <EditText
         android:id="@+id/edPreN"
@@ -90,30 +106,14 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
+        android:digits="0123456789."
         android:hint="Precio"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edDescN"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.219" />
 
-    <EditText
-        android:id="@+id/edCantN"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Cantidad"
-        app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPreN"
-        app:layout_constraintVertical_bias="0.406" />
 </android.support.constraint.ConstraintLayout>
