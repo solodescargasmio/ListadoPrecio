@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="120dp">
+
+    <TextView
+        android:id="@+id/txCod_Barra"
+        android:layout_width="276dp"
+        android:layout_height="57dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="-13dp"
+        android:layout_marginBottom="56dp"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txDescripcion"
+        android:layout_width="230dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="72dp"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txDescripcion"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="11dp"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/txPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="11dp"
+        android:layout_toEndOf="@+id/txCod_Barra"
+        android:layout_toRightOf="@+id/txCod_Barra"
+        android:textSize="10dp" />
+
+</RelativeLayout>
