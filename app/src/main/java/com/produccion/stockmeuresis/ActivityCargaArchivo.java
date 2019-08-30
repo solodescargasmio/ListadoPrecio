@@ -115,7 +115,11 @@ public class ActivityCargaArchivo extends AppCompatActivity {
                     File file = new File(raiz, nombre);
                     String dir= file.getAbsolutePath();
 
-                    CopiarArchivos(dir); //En esta funcion esta la magia
+                    Intent ir= new Intent(ActivityCargaArchivo.this,CsvASqlite.class);
+                    ir.putExtra("path",dir);
+                    startActivity(ir);
+
+                  //  CopiarArchivos(dir); //En esta funcion esta la magia
                 }
                 else
                 {
