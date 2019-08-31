@@ -132,69 +132,6 @@ public class ActivityCargaArchivo extends AppCompatActivity {
         }
 
     }
-
-        private void CopiarArchivos(String dirArchivo) {
-            SQLiteDatabase db=null;
-         //   ArrayList<Producto> prod=new ArrayList<Producto>();
-            String texto="",subTexto="",id="",codigo="",descripcion="",cBarra="";
-            final ConexionSQLiteHelper cnn=new ConexionSQLiteHelper(getApplicationContext());
-            Producto producto;
-            Integer pos=0,nCont=0,nCant=0;
-            float fPrecio;
-            nCant=cnn.contarCantidad();
-            if(nCant>0){
-                cnn.deleteDatos();
-            }
-        try{
-            pos=dirArchivo.indexOf(":");
-            File inFile = new File(dirArchivo);//Corto el path para obtener la direccion del archivo
-            //BufferedReader permite leer una linea completa del archivo ubicado en inFile
-            BufferedReader leer= new BufferedReader(new InputStreamReader(new FileInputStream(inFile)));
-            while ((texto = leer.readLine())!=null) {//Recorro el buffer hasta que no queden lineas y guardo en base de datos
-                fPrecio=(float)0.00;
-                pos=posicionPuntoyComa(texto,";");
-                producto = new Producto();
-                if(pos>0){
-                    nCont=nCont+1;
-                  codigo=texto.substring(0,pos);
-                  texto=texto.substring(pos+1,texto.length());
-                  pos=posicionPuntoyComa(texto,";");
-                  descripcion=texto.substring(0,pos);
-                  texto=texto.substring(pos+1,texto.length());
-                  pos=posicionPuntoyComa(texto,";");
-                  if(pos>0){
-                      cBarra=texto.substring(0,pos);
-                      fPrecio=Float.valueOf(texto.substring(pos+1,texto.length()));
-
-                    }else{
-                        cBarra=texto.substring(pos+1,texto.length());
-                    }
-                  producto.setCodigo(codigo);
-                  producto.setDescripcion(descripcion);
-                  producto.setCodigoBarra(cBarra);
-                  producto.setPrecio(fPrecio);
-                  producto.setCantidad((float) 0);
-                  producto.setId(nCont);
-              //    prod.add(producto);
-                 cnn.agregarProducto(producto);
-                }
-            }cnn.CerrarConexion(db);//Cierro la conexion a la base de datos
-            Toast.makeText(this,"Base de Datos Importada con Exito \nCantidad de Registros "+nCont,Toast.LENGTH_SHORT).show();
-            Intent ir=new Intent(ActivityCargaArchivo.this,ListaProductos.class);
-            startActivity(ir);
-        } catch(IOException e) {
-
-                Toast.makeText(this,e.getMessage()+" Permisos de lectura/escritura denegados. Verificar !!!",Toast.LENGTH_LONG).show();
-            Intent ir=new Intent(ActivityCargaArchivo.this,MainActivity.class);
-            startActivity(ir);
-
-            }
-        }
-        private int posicionPuntoyComa(String Linea, String caracter){
-        int pos=0;
-          pos=Linea.indexOf(caracter);
-        return pos;
-        }
         private boolean CotrolExtencion(String path){
         String tramo="csv",exte="";
         boolean lOk=false;

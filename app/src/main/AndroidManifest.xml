@@ -33,7 +33,8 @@
         <activity android:name=".List_Prod" />
         <activity
             android:name=".ListaProductos"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".ActivityCargaArchivo"
             android:label="@string/title_activity_carga_archivo"

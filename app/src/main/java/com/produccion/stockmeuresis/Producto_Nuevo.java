@@ -36,8 +36,6 @@ public class Producto_Nuevo extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setActionBar();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setVisibility(INVISIBLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // getSupportActionBar().setIcon(R.mipmap.ic_launcher_foreground);
         Codigo=(EditText)findViewById(R.id.edCodN);

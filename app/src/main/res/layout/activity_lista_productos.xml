@@ -7,7 +7,7 @@
     tools:context=".ListaProductos">
     <EditText
         android:id="@+id/edCampoBusqueda"
-        android:layout_width="308dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_margin="30dp"
         android:layout_marginStart="8dp"
@@ -28,8 +28,8 @@
 
     <ListView
         android:id="@+id/listaProd"
-        android:layout_width="334dp"
-        android:layout_height="327dp"
+        android:layout_width="match_parent"
+        android:layout_height="605dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"

@@ -57,7 +57,7 @@ public class CsvASqlite extends AppCompatActivity {
         String texto="",subTexto="",id="",codigo="",descripcion="",cBarra="";
         final ConexionSQLiteHelper cnn=new ConexionSQLiteHelper(getApplicationContext());
         Producto producto;
-        Integer pos=0,nCont=0,nCant=0;
+        Integer pos=0,nCant=0;
         float fPrecio;
         nCant=cnn.contarCantidad();
         if(nCant>0){

@@ -57,8 +57,8 @@ public class ItemProductosAdapter extends BaseAdapter{
         TextView precio = (TextView) vi.findViewById(R.id.txPrecio);
         precio.setText("$ "+item.getPrecio().toString());
 
-        TextView cantidad = (TextView) vi.findViewById(R.id.txCantidad);
-        cantidad.setText(item.getCantidad().toString());
+     /*   TextView cantidad = (TextView) vi.findViewById(R.id.txCantidad);
+        cantidad.setText(item.getCantidad().toString());*/
 
         return vi;
     }
